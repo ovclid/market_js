@@ -54,7 +54,8 @@
         <script type="text/javascript" src="market_info_Middle.js"></script>
         <script type="text/javascript" src="market_info_North.js"></script>
         <script type="text/javascript" src="market_info_South.js"></script>
-        
+        <script type="text/javascript" src="market_parking_lot.js"></script>
+             
 
         <script>
 
@@ -106,9 +107,13 @@
                 marker.setMap(map);
                                
                 // 마커에 클릭이벤트를 등록합니다
+                //var content = '<div class="click_text"> <address> <a href = "https://map.kakao.com/link/to/'+ market[i] + ',' + loc_Parking_lot[market[i]][0] + ',' + loc_Parking_lot[market[i]][1] + '">' + market[i] + " 카카오 내비" + '</a> </address> </div>';
+                var content = market[i];
+                console.log(content);
                 kakao.maps.event.addListener(marker, 'click', function() {
+                    
                     console.log("mark event listener!!!");
-                    infowindow.setContent(market[i]);
+                    infowindow.setContent(content);
                     infowindow.open(map, marker);
                     } 
                 );
@@ -117,8 +122,7 @@
                 var customOverlay = new kakao.maps.CustomOverlay({
                     map: map,
                     position: polygonPath[market[i]][0],
-                    content: '<div class = "overlay">' + market[i]  + '</div>',
-                    //xAnchor: -0.08,
+                    content: '<div class = "overlay">' + market[i]  + '</div>',                    
                     yAnchor: 3.0
                 })
 
