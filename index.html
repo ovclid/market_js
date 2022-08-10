@@ -39,14 +39,15 @@
 
 <body>
     <div>
-        <input id="box" type="text" size="50" value="충북 진천군 진천읍 성석리 507-3번지" /> 
+        <input id="box" type="text" size="50" placeholder="주소 입력창 (기본 : 진천읍 중앙동7길 20)" /> 
         <input type="button" value="검색" onclick="searchAddress();" style="background-color: aliceblue;" />
         <button onClick="window.location.reload();">초기화</button>
         <p></p>
-
+        <div id="list" style="width:100%;height:80px; font-size:12px;background-color: rgb(229, 240, 240);">        </div>
+        <p></p>
         <div id="map" style="width:100%;height:650px;"></div>
-        <br>
-        <div id="list" style="width:100%;height:100px;overflow: auto;background-color: aqua;">        
+        
+        
         
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56dd36038680e4d6f7b1cbc67b011a06&libraries=services"></script>
         <script type="text/javascript" src="market_info_CheongJu.js"></script>
@@ -189,9 +190,15 @@
                 list_ele.appendChild(newItem);
 
                 var geocoder = new kakao.maps.services.Geocoder();
-
+                
+                
+                var address = document.getElementById("box").value;
+                if (address == '') {
+                    address = "진천읍 중앙동7길 20";
+                }
+                
                 // 주소로 좌표를 검색합니다
-                geocoder.addressSearch(document.getElementById("box").value, function(result, status) {
+                geocoder.addressSearch(address, function(result, status) {
 
                     // 정상적으로 검색이 완료됐으면 
                     if (status === kakao.maps.services.Status.OK) {
@@ -205,9 +212,9 @@
                         });
 
                         // 인포윈도우로 장소에 대한 설명을 표시합니다
-                        var addr = document.getElementById("box").value;
+                        //var addr = document.getElementById("box").value;
                         var infowindow = new kakao.maps.InfoWindow({
-                            content: '<div style="width:150px;text-align:left;">' + addr + '</div>'
+                            content: '<div style="width:150px;text-align:left;">' + address + '</div>'
                         });
                         infowindow.open(map, marker);
 
