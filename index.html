@@ -79,7 +79,7 @@
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
             mapOption = {
                 center: base_center, // 지도의 중심좌표
-                level: 5 // 지도의 확대 레벨
+                level: 5 // 지도의 확대 레벨(숫자가 커질 수록 지도 축소)
             };  
         
             // 지도를 생성합니다    
@@ -198,6 +198,13 @@
 
             });
 
+            function goto_address () {
+                console.log(this.innerText)
+                
+                console.log("market_name", this.innerText);
+                var coords = polygonPath[this.innerText][0];
+                map.setCenter(coords);
+            }
 
             function searchAddress() {
 
@@ -209,7 +216,7 @@
                 var newItem = document.createElement("div");
                 newItem.innerHTML = document.getElementById("box").value;
                 
-                list_ele.appendChild(newItem);
+                //list_ele.appendChild(newItem);
 
                 var geocoder = new kakao.maps.services.Geocoder();
                 
@@ -220,21 +227,41 @@
                 }
                 
                 
-
+                console.log("요청한 주소가 전통시장명에 포함되었는지 확인...");
                 //if (check_address_in_market()) {               }
                 //var market_found = false;
+                var similar_market_found = false;
+
                 for (var i = 0 ; i < market.length; i++) {
+                    
 
                     console.log(polygonPath[market[i]][0]);
+                    console.log(market[i]);
+                    console.log(market[i].includes(address));
+
+                    if (market[i].includes(address)) {
+                        var newItem = document.createElement("div");
+                        newItem.innerHTML = market[i];
+                        newItem.onclick = goto_address;
+
+                        list_ele.appendChild(newItem);
+                        similar_market_found = true;
+                    }
 
                     if ( market[i] == address) {
-                        var coords = polygonPath[market[i]][polygonPath[market[i]].length - 1];
+                        //var coords = polygonPath[market[i]][polygonPath[market[i]].length - 1];
+                        var coords = polygonPath[market[i]][0];
                         map.setCenter(coords);
 
+                        similar_market_found = false;
                         return;
                     }
                 }
 
+                console.log(similar_market_found);
+                if (similar_market_found) {
+                        return 
+                }
                 
                 // 주소로 좌표를 검색합니다
                 geocoder.addressSearch(address, function(result, status) {
@@ -250,14 +277,6 @@
                             position: coords
                         });
 
-                        // 인포윈도우로 장소에 대한 설명을 표시합니다
-                
-                        //var infowindow = new kakao.maps.InfoWindow({
-                        //    content: '<div style="width:150px;text-align:left;">' + address + '</div>'
-                        //});
-                        //infowindow.open(map, marker);
-
-
                          // 커스텀 오버레이를 생성합니다
                         var customOverlay = new kakao.maps.CustomOverlay({
                             map: map,
@@ -271,7 +290,7 @@
                     } 
                     else {
                         var newItem = document.createElement("div");
-                        newItem.innerHTML = document.getElementById("box").value + "검색 실패";
+                        newItem.innerHTML = document.getElementById("box").value + " : 검색 결과 없습니다.";
                 
                         document.getElementById("list").appendChild(newItem);
 
