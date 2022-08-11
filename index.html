@@ -152,7 +152,7 @@
 
             }
 
-            // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출
+            // 지도를 클릭하면 해당 위치에 마크 생성(내비게이션 연결)
             kakao.maps.event.addListener(map, 'rightclick', function(mouseEvent) {        
                 var detailAddr = '';
                 searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
@@ -175,6 +175,32 @@
                         list_ele.appendChild(newItem);
 
                         list_ele.scrollTop = list_ele.scrollHeight;
+                        
+                        var coords = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng()); 
+                        var marker = new kakao.maps.Marker({
+                            map: map,
+                            position: coords
+                        });
+
+                         // 커스텀 오버레이 생성
+                        
+                        //var detail_content = '<div class = "search_overlay">' + result[0].address.address_name + '</div>';
+
+
+                        var detail_content = '<div class="search_overlay">' + '<address> <a href = https://map.kakao.com/link/to/' 
+                            + result[0].address.address_name.replaceAll(' ', '') + ',' + latlng.getLat() + ',' + latlng.getLng() + ">" + 
+                            result[0].address.address_name + '</a>' + '</address> </div>';
+
+                        var customOverlay = new kakao.maps.CustomOverlay({
+                            map: map,
+                            position:coords,
+                            content: detail_content,                    
+                            yAnchor: 3.0
+                        })
+
+                        //map.setCenter(coords);
+
+
 
                     }
                     else{
@@ -247,10 +273,15 @@
                         });
 
                          // 커스텀 오버레이 생성
+                        var detail_content = '<div class="search_overlay">' + '<address> <a href = https://map.kakao.com/link/to/' 
+                            + address.replaceAll(' ', '') + ',' + result[0].y + ',' + result[0].x + ">" + 
+                            address + '</a>' + '</address> </div>';
+
                         var customOverlay = new kakao.maps.CustomOverlay({
                             map: map,
                             position:coords,
-                            content: '<div class = "search_overlay">' + address + '</div>',                    
+                            //content: '<div class = "search_overlay">' + address + '</div>',                    
+                            content: detail_content,                    
                             yAnchor: 3.0
                         })
                         map.setCenter(coords);
