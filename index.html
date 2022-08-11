@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +52,7 @@
         <input type="button" value="검색" onclick="searchAddress();" style="background-color: aliceblue;" />
         <button onClick="window.location.reload();">초기화</button>
         <p></p>
-        <div id="list" style="width:100%;height:80px; overflow: auto; font-size:12px;background-color: rgb(229, 240, 240);">        
+        <div id="list" style="width:100%;height:60px; overflow: auto; font-size:12px;background-color: rgb(229, 240, 240);">        
             <p style="font-style: italic; color: cadetblue;"> ㅇ  위치 정보 안내<br>
                 &nbsp;&nbsp;  - 스마트폰 : 지도의 원하는 위치를 1초간 눌러주세요. <br>
                 &nbsp;&nbsp;  - PC : 마우스 오른쪽 버튼 클릭하세요. 
@@ -62,8 +61,6 @@
         <p></p>
         <div id="map" style="width:100%;height:650px;"></div>
         
-        
-        
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56dd36038680e4d6f7b1cbc67b011a06&libraries=services"></script>
         <script type="text/javascript" src="market_info_CheongJu.js"></script>
         <script type="text/javascript" src="market_info_Middle.js"></script>
@@ -71,23 +68,20 @@
         <script type="text/javascript" src="market_info_South.js"></script>
         <script type="text/javascript" src="market_parking_lot.js"></script>
              
-
         <script>
-
             var base_center = new kakao.maps.LatLng(36.86112945169546, 127.45152537599513)
-
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-            mapOption = {
-                center: base_center, // 지도의 중심좌표
-                level: 5 // 지도의 확대 레벨(숫자가 커질 수록 지도 축소)
+            var mapContainer = document.getElementById('map');
+            var mapOption = {
+                center: base_center,    // 지도의 중심좌표
+                level: 5                // 지도의 확대 레벨(숫자가 커질 수록 지도 축소)
             };  
         
-            // 지도를 생성합니다    
+            // 지도 생성    
             var map = new kakao.maps.Map(mapContainer, mapOption); 
             var mapTypeControl = new kakao.maps.MapTypeControl();    
             var polygonPath = Object.assign({}, polygonPath_Middle, polygonPath_CheongJu, polygonPath_North);
             
-            // 인포윈도우를 생성합니다
+            // 인포윈도우 생성
             var infowindow = new kakao.maps.InfoWindow({
                     //zIndex: 1,
                     content : 'market[i]',
@@ -95,18 +89,17 @@
             });
 
             map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPLEFT);
-
-            var market = Object.keys(polygonPath);  // 딕셔너리 키 값을 배열로 저장
+            var market = Object.keys(polygonPath);  
             for (var i = 0; i < market.length ; i++) {
-                // 지도에 표시할 다각형을 생성합니다
+                // 지도에 표시할 다각형을 생성
                 var polygon = new kakao.maps.Polygon({
-                    path: polygonPath[market[i]], // 그려질 다각형의 좌표 배열입니다
-                    strokeWeight: 3, // 선의 두께입니다
-                    strokeColor: '#FF0000', // 선의 색깔입니다
-                    strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-                    strokeStyle: 'line', // 선의 스타일입니다
-                    fillColor: '#A2FF99', // 채우기 색깔입니다
-                    fillOpacity: 0.4 // 채우기 불투명도 입니다
+                    path: polygonPath[market[i]],   // 다각형 좌표 배열
+                    strokeWeight: 3,                // 선의 두께
+                    strokeColor: '#FF0000',         // 선의 색깔
+                    strokeOpacity: 0.7,             // 선의 불투명(1 ~ 0: 0에 가까울수록 투명)
+                    strokeStyle: 'line',            // 선의 스타일
+                    fillColor: '#A2FF99',           // 채우기 색깔
+                    fillOpacity: 0.4                // 채우기 불투명
                 });
 
                 // 지도에 다각형을 표시합니다
@@ -121,13 +114,20 @@
                 });    
                 marker.setMap(map);
                                
-                // 마커에 클릭이벤트를 등록합니다
                 //var content = '<div class="click_text"> <address> <a href = "https://map.kakao.com/link/to/'+ market[i] + ',' + loc_Parking_lot[market[i]][0] + ',' + loc_Parking_lot[market[i]][1] + '">' + market[i] + " 카카오 내비" + '</a> </address> </div>';
                 var content = market[i];
-                //console.log(content);
                 kakao.maps.event.addListener(marker, 'click', function() {
                     
                     console.log("mark event listener!!!");
+
+                    if(Object.keys(loc_Parking_lot).includes(market[i])){
+                        content = '<div class="click_text"> 카카오내비 :' + '<address> <a href = https://map.kakao.com/link/to/' 
+                            + market[i] + ',' + loc_Parking_lot[market[i]][0] + ',' + loc_Parking_lot[market[i]][1] + ">" + 
+                            market[i] + " 주차장" + '</a>' + '</address> </div>';
+
+
+                    }
+
                     infowindow.setContent(content);
                     infowindow.open(map, marker);
                     } 
@@ -146,36 +146,27 @@
             map.setCenter(base_center)
             
             var geocoder = new kakao.maps.services.Geocoder();
+
             function searchDetailAddrFromCoords(coords, callback) {
-            // 좌표로 법정동 상세 주소 정보를 요청합니다
                 geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 
             }
 
-            // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+            // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출
             kakao.maps.event.addListener(map, 'rightclick', function(mouseEvent) {        
-                
                 var detailAddr = '';
-                console.log("우클릭 실행됨");
-                
                 searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-                    console.log("마우스 이벤트 처리 시도");
+                    //console.log("마우스 이벤트 처리 시도");
                     if (status === kakao.maps.services.Status.OK) {
-                        console.log("성공: ");
                         detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
                         detailAddr += '<div>지번주소 : ' + result[0].address.address_name + '</div>';
-                        console.log(detailAddr);
+                        //console.log(detailAddr);
 
-                        
-                        // 클릭한 위도, 경도 정보를 가져옵니다 
                         var latlng = mouseEvent.latLng; 
-                        
                         var message = '위경도 : (' + latlng.getLat() + ', ' + latlng.getLng() + ')';
                         message = detailAddr + message + '<br>';
                         console.log(message);
-                        //var resultDiv = document.getElementById('clickLatlng'); 
-                        //resultDiv.innerHTML = message;
-
+    
                         var newItem = document.createElement("div");
                         newItem.innerHTML = message;
                         
@@ -191,23 +182,17 @@
                         
                     }
                 });
-
-                  
-                
-
-
             });
 
+            // 표시된 시장 목록중 하나를 선택하면 해당 시장으로 좌표 이동
             function goto_address () {
-                console.log(this.innerText)
-                
-                console.log("market_name", this.innerText);
-                var coords = polygonPath[this.innerText][0];
-                map.setCenter(coords);
+                //console.log(this.innerText)
+                //console.log("market_name", this.innerText);
+                //var coords = polygonPath[this.innerText][0];
+                map.setCenter(polygonPath[this.innerText][0]);
             }
 
             function searchAddress() {
-
                 document.activeElement.blur();  // 주소 검색 input 에 대한 포커스 릴리스 -> 스마트폰 불편
 
                 var list_ele = document.getElementById("list");
@@ -216,84 +201,64 @@
                 var newItem = document.createElement("div");
                 newItem.innerHTML = document.getElementById("box").value;
                 
-                //list_ele.appendChild(newItem);
-
-                var geocoder = new kakao.maps.services.Geocoder();
-                
-                
                 var address = document.getElementById("box").value;
                 if (address == '') {
                     address = "진천읍 중앙동7길 20";
                 }
                 
                 
-                console.log("요청한 주소가 전통시장명에 포함되었는지 확인...");
-                //if (check_address_in_market()) {               }
-                //var market_found = false;
+                // 주소 검색 전 전통시장 이름과 유사성 체크 
+                // 유사(include)하면 유사한 시장명 표시, 동일하면 그것으로 중심자표 이동
+
                 var similar_market_found = false;
-
                 for (var i = 0 ; i < market.length; i++) {
-                    
-
-                    console.log(polygonPath[market[i]][0]);
-                    console.log(market[i]);
-                    console.log(market[i].includes(address));
-
                     if (market[i].includes(address)) {
                         var newItem = document.createElement("div");
                         newItem.innerHTML = market[i];
                         newItem.onclick = goto_address;
+                        
 
                         list_ele.appendChild(newItem);
                         similar_market_found = true;
                     }
 
                     if ( market[i] == address) {
-                        //var coords = polygonPath[market[i]][polygonPath[market[i]].length - 1];
                         var coords = polygonPath[market[i]][0];
                         map.setCenter(coords);
 
-                        similar_market_found = false;
+                        //similar_market_found = false;
                         return;
                     }
                 }
-
-                console.log(similar_market_found);
+                
                 if (similar_market_found) {
-                        return 
+                    return
                 }
                 
-                // 주소로 좌표를 검색합니다
+                // 주소로 좌표 검색
+                var geocoder = new kakao.maps.services.Geocoder();
                 geocoder.addressSearch(address, function(result, status) {
-
-                    // 정상적으로 검색이 완료됐으면 
                     if (status === kakao.maps.services.Status.OK) {
-
                         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                        
-                        // 결과값으로 받은 위치를 마커로 표시합니다
+            
                         var marker = new kakao.maps.Marker({
                             map: map,
                             position: coords
                         });
 
-                         // 커스텀 오버레이를 생성합니다
+                         // 커스텀 오버레이 생성
                         var customOverlay = new kakao.maps.CustomOverlay({
                             map: map,
                             position:coords,
                             content: '<div class = "search_overlay">' + address + '</div>',                    
                             yAnchor: 3.0
                         })
-
-                        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                         map.setCenter(coords);
                     } 
                     else {
                         var newItem = document.createElement("div");
                         newItem.innerHTML = document.getElementById("box").value + " : 검색 결과 없습니다.";
-                
                         document.getElementById("list").appendChild(newItem);
-
                     }
                 });    
             }
