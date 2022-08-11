@@ -80,7 +80,8 @@
             var map = new kakao.maps.Map(mapContainer, mapOption); 
             var mapTypeControl = new kakao.maps.MapTypeControl();    
             var polygonPath = Object.assign({}, polygonPath_Middle, polygonPath_CheongJu, polygonPath_North);
-            
+            var markers_list = [];
+
             // 인포윈도우 생성
             var infowindow = new kakao.maps.InfoWindow({
                     //zIndex: 1,
@@ -143,6 +144,14 @@
 
             }
 
+
+            // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
+            function setMarkers(map) {
+                for (var i = 0; i < markers_list.length; i++) {
+                    markers_list[i].setMap(map);
+                }            
+            }
+
             map.setCenter(base_center)
             
             var geocoder = new kakao.maps.services.Geocoder();
@@ -176,11 +185,13 @@
 
                         list_ele.scrollTop = list_ele.scrollHeight;
                         
+                        setMarkers(null);
                         var coords = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng()); 
                         var marker = new kakao.maps.Marker({
                             map: map,
                             position: coords
                         });
+                        markers_list.push(marker);
 
                          // 커스텀 오버레이 생성
                         
@@ -197,7 +208,7 @@
                             content: detail_content,                    
                             yAnchor: 3.0
                         })
-
+                        markers_list.push(customOverlay);
                         //map.setCenter(coords);
 
 
@@ -266,11 +277,15 @@
                 geocoder.addressSearch(address, function(result, status) {
                     if (status === kakao.maps.services.Status.OK) {
                         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-            
+                        
+
+                        setMarkers(null);
+
                         var marker = new kakao.maps.Marker({
                             map: map,
                             position: coords
                         });
+                        markers_list.push(marker);
 
                          // 커스텀 오버레이 생성
                         var detail_content = '<div class="search_overlay">' + '<address> <a href = https://map.kakao.com/link/to/' 
@@ -284,6 +299,7 @@
                             content: detail_content,                    
                             yAnchor: 3.0
                         })
+                        markers_list.push(customOverlay);
                         map.setCenter(coords);
                     } 
                     else {
