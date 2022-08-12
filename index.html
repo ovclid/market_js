@@ -48,22 +48,24 @@
 
 <body>
     <div>
-        <input id="box" type="text" size="40" onkeypress="javascript:if(event.keyCode == 13) {searchAddress();}"  placeholder="주소 입력창 (기본 : 진천읍 중앙동7길 20)" /> 
+        <input id="box" type="text" size="50" onkeypress="javascript:if(event.keyCode == 13) {searchAddress();}"  placeholder="주소 입력창 (기본 : 진천읍 중앙동7길 20)" /> 
         <input type="button" value="검색" onclick="searchAddress();" style="background-color: aliceblue;" />
         <button onClick="window.location.reload();">초기화</button>
         <p></p>
-        <div id="list" style="width:100%;height:60px; overflow: auto; font-size:12px;background-color: rgb(229, 240, 240);">        
-            <p style="font-style: italic; color: cadetblue;"> ㅇ  위치 정보 안내<br>
+        <div id="list" style="width:100%;height:50px; overflow: auto; font-size:12px;background-color: rgb(229, 240, 240);">        
+            <div style="font-style: italic; color: cadetblue;"> ㅇ  위치 정보 안내<br>
                 &nbsp;&nbsp;  - 스마트폰 : 지도의 원하는 위치를 1초간 눌러주세요. <br>
                 &nbsp;&nbsp;  - PC : 마우스 오른쪽 버튼 클릭하세요. 
-            </p>
+            </div>
         </div>
         <p></p>
         <div id="map" style="width:100%;height:650px;"></div>
         
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=56dd36038680e4d6f7b1cbc67b011a06&libraries=services"></script>
-        <script type="text/javascript" src="market_info_CheongJu.js"></script>
+        <script type="text/javascript" src="market_info_Main.js"></script>
         <script type="text/javascript" src="market_info_Middle.js"></script>
+        <script type="text/javascript" src="market_info_East.js"></script>
+        <script type="text/javascript" src="market_info_West.js"></script>
         <script type="text/javascript" src="market_info_North.js"></script>
         <script type="text/javascript" src="market_info_South.js"></script>
         <script type="text/javascript" src="market_parking_lot.js"></script>
@@ -79,7 +81,7 @@
             // 지도 생성    
             var map = new kakao.maps.Map(mapContainer, mapOption); 
             var mapTypeControl = new kakao.maps.MapTypeControl();    
-            var polygonPath = Object.assign({}, polygonPath_Middle, polygonPath_CheongJu, polygonPath_North);
+            var polygonPath = Object.assign({}, polygonPath_Main, polygonPath_Middle, polygonPath_East, polygonPath_West, polygonPath_North, polygonPath_South);
             var markers_list = [];
 
             // 인포윈도우 생성

@@ -1,5 +1,5 @@
 // 보은, 옥천, 영동
 
-var polygonPath_South = {
+var polygonPath_East = {
     
 }
