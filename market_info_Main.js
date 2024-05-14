@@ -297,5 +297,20 @@ var polygonPath_Main = {
         new kakao.maps.LatLng(36.74068741714272, 127.45639173950298), 
         new kakao.maps.LatLng(36.74027333251795, 127.45692123002176), 
     ], 
-
+     "하복대시장" : [ 
+        new kakao.maps.LatLng(36.63513183575812, 127.4277731299472 ), 
+        new kakao.maps.LatLng(36.63544468049329, 127.4283959799024 ), 
+        new kakao.maps.LatLng(36.63594103412417, 127.4284301602697 ), 
+        new kakao.maps.LatLng(36.63599373836058, 127.4284019478916 ), 
+        new kakao.maps.LatLng(36.63599143401322, 127.4280724115167 ), 
+        new kakao.maps.LatLng(36.63593734617287, 127.427897005613 ), 
+        new kakao.maps.LatLng(36.63598535050074, 127.4277877661276 ), 
+        new kakao.maps.LatLng(36.63640454084742, 127.4274814079443 ), 
+        new kakao.maps.LatLng(36.63638619793829, 127.4273363959439 ), 
+        new kakao.maps.LatLng(36.63658882176642, 127.4272873906466 ), 
+        new kakao.maps.LatLng(36.63652533834479, 127.4268947592776 ), 
+        new kakao.maps.LatLng(36.6363188741491, 127.4269313182671 ), 
+        new kakao.maps.LatLng(36.63574152467802, 127.427361479703 ), 
+        new kakao.maps.LatLng(36.63566734013461, 127.4273754247156 ), 
+        ],
 };
