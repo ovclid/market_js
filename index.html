@@ -48,7 +48,7 @@
 
 <body>
     <div>
-        <input id="box" type="text" size="50" onkeypress="javascript:if(event.keyCode == 13) {searchAddress();}"  placeholder="주소 입력창 (기본 : 진천읍 중앙동7길 20)" /> 
+        <input id="box" type="text" size="50" onkeypress="javascript:if(event.keyCode == 13) {searchAddress();}"  placeholder="주소 입력창" /> 
         <input type="button" value="검색" onclick="searchAddress();" style="background-color: aliceblue;" />
         <button onClick="window.location.reload();">초기화</button>
         <p></p>
@@ -72,7 +72,7 @@
              
         <script>
             //var base_center = new kakao.maps.LatLng(36.858351739006984, 127.44549719302887)
-            var base_center = new kakao.maps.LatLng(36.63410550994249, 127.48850852878216)
+            var base_center = new kakao.maps.LatLng(36.63310550994249, 127.48650852878216)
             var mapContainer = document.getElementById('map');
             var mapOption = {
                 center: base_center,    // 지도의 중심좌표
