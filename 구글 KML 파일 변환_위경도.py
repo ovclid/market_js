@@ -1,3 +1,6 @@
+# (코드설명) kml 파일을 다음카카오 지도상에 표시할 수 있는 코드로 변환
+# (사전준비) 구글어스 프로 프로그램과 시장 지도를 이용하여 다각형을 지도상에 표시한 후 kml 파일 형태로 저장
+
 from bs4 import BeautifulSoup
 import csv
 
