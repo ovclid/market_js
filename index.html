@@ -80,7 +80,8 @@
         <script type="text/javascript" src="market_info_North.js"></script>
         <script type="text/javascript" src="market_info_South.js"></script>
         <script type="text/javascript" src="market_parking_lot.js"></script>
-             
+        <script type="text/javascript" src="market_onnuri.js"></script>
+	    
         <script>
             //var base_center = new kakao.maps.LatLng(36.858351739006984, 127.44549719302887)
             let base_Lat = 36.63310550994249;
@@ -132,12 +133,7 @@
             var mapTypeControl = new kakao.maps.MapTypeControl();    
             var polygonPath = Object.assign({}, polygonPath_Main, polygonPath_Middle, polygonPath_East, polygonPath_West, polygonPath_North, polygonPath_South);
             var markers_list = [];
-
-	    var onnuri_reg_list = {
-		"가복카페" : [36.176742, 127.775142, "카페"],
-		"거송" : [36.176528, 127.775341, "한식"]
-	    };
-		
+	
 	    var onnuri_reg_market = Object.keys(onnuri_reg_list);
 	    for (var i = 0; i < onnuri_reg_market.length ; i++) { 
 		    var circle = new kakao.maps.Circle({
