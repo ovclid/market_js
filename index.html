@@ -26,13 +26,13 @@
                /* background-image: url("overlay_bg.png"); */
            } 
 
-	.currentpos_overlay {
-               width : '45px';
-               height : '25px';
-               background-color : green; 
+	    .currentpos_overlay {
+            width : '40px';
+               height : '18px';
+               background-color : rgb(253, 102, 223); 
                border-radius: 5px;
-               font-size: 12px; 
-               color:white; 
+               font-size: 11px;     
+               color:rgb(248, 2, 2); 
                font-weight: bold;
                padding: 2px;
            } 
@@ -87,41 +87,39 @@
             let base_Lat = 36.17502542411789; //36.176580653239384;  // 영동전통시장
             let base_Lng = 127.77580277515723; //127.77534847937774;
 		
-	     function setPosition(position) {
+
+
+
+	        function setPosition(position) {
                 base_Lat = position.coords.latitude;
                 base_Lng = position.coords.longitude;
 
-		console.log(position.coords.latitude)
-		console.log(position.coords.longitude)
+                console.log(position.coords.latitude)
+                console.log(position.coords.longitude)
 
-		base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
-		map.setCenter(base_center)
+		        base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
+		        map.setCenter(base_center)
 
-		var currentPosMarker = new kakao.maps.Marker({
+		        var currentPosMarker = new kakao.maps.Marker({
                 	map: map,
                 	position: base_center
                 });
 		
-		currentPosMarker.setMap(map);
+		        currentPosMarker.setMap(map);
 
-		// 커스텀 오버레이를 생성합니다
+		        // 커스텀 오버레이를 생성합니다
                 var customOverlay = new kakao.maps.CustomOverlay({
                     map: map,
                     position: base_center,
                     content: '<div class = "currentpos_overlay">' + '현위치 인근'  + '</div>',                    
                     yAnchor: 3.0
                 })
-		     
-	
             }
 
-	    // 뒤의 코드가 실행되고(지도가 그려지고) 나서 나중에 천천히 적용됨
+	        // 뒤의 코드가 실행되고(지도가 그려지고) 나서 나중에 천천히 적용됨
             //navigator.geolocation.getCurrentPosition(success = setPosition, error = undefined, options = undefined);
 
-
-		
             let base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
-		
             var mapContainer = document.getElementById('map');
             var mapOption = {
                 center: base_center,    // 지도의 중심좌표
@@ -133,44 +131,17 @@
             var mapTypeControl = new kakao.maps.MapTypeControl();    
             var polygonPath = Object.assign({}, polygonPath_Main, polygonPath_Middle, polygonPath_East, polygonPath_West, polygonPath_North, polygonPath_South);
             var markers_list = [];
+	
+
+
+            
+		
             // 인포윈도우 생성
             var infowindow = new kakao.maps.InfoWindow({
                     //zIndex: 1,
                     content : 'market[i]',
                     removable : true
             });
-		
-	    var onnuri_reg_market = Object.keys(onnuri_reg_list);
-	    for (var i = 0; i < onnuri_reg_market.length ; i++) { 
-		    var circle = new kakao.maps.Circle({
-	    		center : new kakao.maps.LatLng(onnuri_reg_list[onnuri_reg_market[i]][0], onnuri_reg_list[onnuri_reg_market[i]][1]),  // 원의 중심좌표 입니다 
-	    		radius: 3, // 미터 단위의 원의 반지름입니다 
-	    		strokeWeight: 2, // 선의 두께입니다 
-	    		strokeColor: '#FF00FF', // 선의 색깔입니다
-	    		strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	    		strokeStyle: 'line', // 선의 스타일 입니다
-	    		//fillColor: '#CFE7FF', // 채우기 색깔입니다
-			fillColor: '#FF00FF', // 채우기 색깔입니다
-	    		fillOpacity: 0.7  // 채우기 불투명도 입니다   
-		    }); 
-
-		    kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
-                    	var latlng = mouseEvent.latLng;
-   		    	console.log(latlng.toString()); 
-                    	console.log("circle event listener!!!");
-
-                	//content = '<div class="click_text"> 카카오내비 :' + '<address> <a href = https://map.kakao.com/link/to/' 
-                        //    + onnuri_reg_market[i] + ',' + onnuri_reg_list[onnuri_reg_market[i]][0] + ',' + onnuri_reg_list[onnuri_reg_market[i]][1] + ">" + 
-                        //    onnuri_reg_market[i] + " 주차장" + '</a>' + '</address> </div>';
-
-                    	//infowindow.setContent(content);
-                    	//infowindow.open(map, circle);
-                    });
-
-		    circle.setMap(map); 
-	    };
-		
-
 
             map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPLEFT);
             var market = Object.keys(polygonPath);  
@@ -190,6 +161,7 @@
                 polygon.setMap(map);
                 make_marker(i);
             }
+
 
             function make_marker(i) {
                 var marker = new kakao.maps.Marker({
@@ -233,7 +205,99 @@
                 for (var i = 0; i < markers_list.length; i++) {
                     markers_list[i].setMap(map);
                 }            
+                
             }
+
+
+
+        
+            // 행사 장소
+            gather_lat = 36.17784158411801;
+            gather_lng = 127.7744160743991;
+            gather_pos = new kakao.maps.LatLng(gather_lat, gather_lng);  // 집결 장소
+		    var gatherPosMarker = new kakao.maps.Marker({
+                	map: map,
+                	position: gather_pos
+            });
+		
+		    gatherPosMarker.setMap(map);
+
+		    // 커스텀 오버레이를 생성합니다
+            var customOverlay = new kakao.maps.CustomOverlay({
+                    map: map,
+                    position: gather_pos,
+                    //content: '<div class = "currentpos_overlay">' + '행사장(9.4, 15시)'  + '</div>',   
+                    
+                    content : '<div class="currentpos_overlay">' + '<address> <a href = https://map.kakao.com/link/to/' 
+                            + "행사장" + ',' + gather_lat + ',' + gather_lng + ">" + "행사장(9.4, 15시)" + '</a>' + '</address> </div>',
+
+
+                    yAnchor: 2.9
+            });
+
+
+        var onnuri_reg_market = Object.keys(onnuri_reg_list);
+	    for (var i = 0; i < onnuri_reg_market.length ; i++) { 
+		    var circle = new kakao.maps.Circle({
+	    		center : new kakao.maps.LatLng(onnuri_reg_list[onnuri_reg_market[i]][0], onnuri_reg_list[onnuri_reg_market[i]][1]),  // 원의 중심좌표 입니다 
+	    		radius: 2, // 미터 단위의 원의 반지름입니다 
+	    		strokeWeight: 1, // 선의 두께입니다 
+	    		strokeColor: '#FF00FF', // 선의 색깔입니다
+	    		strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	    		strokeStyle: 'line', // 선의 스타일 입니다
+	    		//fillColor: '#CFE7FF', // 채우기 색깔입니다
+			    fillColor: '#FF00FF', // 채우기 색깔입니다
+	    		fillOpacity: 0.7  // 채우기 불투명도 입니다   
+		    }); 
+
+
+
+            kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {  
+                var latlng = mouseEvent.latLng;
+                console.log("test")
+                console.log(latlng.toString());      
+                
+                //content = '<div class="click_text"> 카카오내비 :' + '<address> <a href = https://map.kakao.com/link/to/' 
+                //            + onnuri_reg_market[i] + ',' + onnuri_reg_list[onnuri_reg_market[i]][0] + ',' + onnuri_reg_list[onnuri_reg_market[i]][1] + ">" + 
+                //            onnuri_reg_market[i] + " 주차장" + '</a>' + '</address> </div>';
+
+                
+                min_value = 9;
+                min_index = -1;
+                for (var i = 0; i < onnuri_reg_market.length ; i++) { 
+                    console.log(mouseEvent.latLng["Ma"])
+                    console.log(onnuri_reg_list[onnuri_reg_market[i]][0])
+                    x = mouseEvent.latLng["Ma"] - onnuri_reg_list[onnuri_reg_market[i]][0];
+                    y = mouseEvent.latLng["La"] - onnuri_reg_list[onnuri_reg_market[i]][1];
+                    value = x*x + y*y;
+                    if (min_value > value){
+                        min_value = value;
+                        min_index = i;
+                    }
+                    console.log(x*x + y*y)
+                };
+                
+                console.log(min_value)
+                console.log(min_index)
+                console.log(onnuri_reg_market[min_index]);
+                console.log(onnuri_reg_list[onnuri_reg_market[min_index]]);
+
+                content = '<div class="click_text">' + onnuri_reg_market[min_index] + "(" + onnuri_reg_list[onnuri_reg_market[min_index]][2] + ")" + "</div>";
+
+
+                var infowindow = new kakao.maps.InfoWindow({
+                    map: map, // 인포윈도우가 표시될 지도
+                    position : mouseEvent.latLng, 
+                    content : content,
+                    removable : true
+                });
+
+            });
+
+            circle.setMap(map); 
+	    };
+
+
 
             map.setCenter(base_center)
             
