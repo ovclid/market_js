@@ -91,6 +91,15 @@
                 });
 		
 		currentPosMarker.setMap(map);
+
+		// 커스텀 오버레이를 생성합니다
+                var customOverlay = new kakao.maps.CustomOverlay({
+                    map: map,
+                    position: base_center,
+                    content: '<div class = "overlay">' + 현위치 부근  + '</div>',                    
+                    yAnchor: 3.0
+                })
+		     
 	
             }
 
