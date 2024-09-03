@@ -80,7 +80,10 @@
                 base_Lng = position.coords.longitude;
 
 		console.log(position.coords.latitude)
-		console.log(position.coords.longitude)      
+		console.log(position.coords.longitude)
+
+		base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
+		map.setCenter(base_center)
             }
 
 		
@@ -88,7 +91,7 @@
 
 
 		
-            var base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
+            let base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
 		
             var mapContainer = document.getElementById('map');
             var mapOption = {
