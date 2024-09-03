@@ -153,21 +153,21 @@
 			fillColor: '#FF00FF', // 채우기 색깔입니다
 	    		fillOpacity: 0.7  // 채우기 불투명도 입니다   
 		    }); 
-		    circle.setMap(map); 
 
-		    
 		    kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
                     	var latlng = mouseEvent.latLng;
    		    	console.log(latlng.toString()); 
                     	console.log("circle event listener!!!");
 
-                	content = '<div class="click_text"> 카카오내비 :' + '<address> <a href = https://map.kakao.com/link/to/' 
-                            + onnuri_reg_market[i] + ',' + onnuri_reg_list[onnuri_reg_market[i]][0] + ',' + onnuri_reg_list[onnuri_reg_market[i]][1] + ">" + 
-                            onnuri_reg_market[i] + " 주차장" + '</a>' + '</address> </div>';
+                	//content = '<div class="click_text"> 카카오내비 :' + '<address> <a href = https://map.kakao.com/link/to/' 
+                        //    + onnuri_reg_market[i] + ',' + onnuri_reg_list[onnuri_reg_market[i]][0] + ',' + onnuri_reg_list[onnuri_reg_market[i]][1] + ">" + 
+                        //    onnuri_reg_market[i] + " 주차장" + '</a>' + '</address> </div>';
 
-                    	infowindow.setContent(content);
-                    	infowindow.open(map, circle);
+                    	//infowindow.setContent(content);
+                    	//infowindow.open(map, circle);
                     });
+
+		    circle.setMap(map); 
 	    };
 		
 
