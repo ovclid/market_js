@@ -151,12 +151,12 @@
 	    		strokeStyle: 'line', // 선의 스타일 입니다
 	    		//fillColor: '#CFE7FF', // 채우기 색깔입니다
 			fillColor: '#FF00FF', // 채우기 색깔입니다
-	    		fillOpacity: 0.7,  // 채우기 불투명도 입니다   
-			clickable: true
+	    		fillOpacity: 0.7  // 채우기 불투명도 입니다   
 		    }); 
 		    circle.setMap(map); 
 
-		    kakao.maps.event.addListener(circle, 'click', function() {
+		    
+		    kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
                     
                     console.log("circle event listener!!!");
 
