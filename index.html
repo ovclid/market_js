@@ -80,12 +80,7 @@
                 base_Lng = position.coords.longitude;
             }
                 
-            if (navigator.geolocation) {
-  				navigator.geolocation.getCurrentPosition(success = setPosition, 
-							                error = undefined, 
-								            options = undefined);
-		};
-	
+            navigator.geolocation.getCurrentPosition(success = setPosition, error = undefined, options = undefined);
             var base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
 		
             var mapContainer = document.getElementById('map');
