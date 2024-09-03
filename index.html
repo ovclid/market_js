@@ -157,7 +157,8 @@
 
 		    
 		    kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
-                    
+                    var latlng = mouseEvent.latLng;
+   		    console.log(latlng.toString()); 
                     console.log("circle event listener!!!");
 
                     
