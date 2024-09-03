@@ -75,7 +75,6 @@
             base_Lat = 36.63310550994249;
             base_Lng = 127.48650852878216;
 
-
             function setPosition(position) {
                 base_Lat = position.coords.latitude;
                 base_Lng = position.coords.longitude;
@@ -86,8 +85,8 @@
 							                error = undefined, 
 								            options = undefined);
 			}
-            
-            var base_center = new kakao.maps.LatLng(36.63310550994249, 127.48650852878216)
+            var base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
+		
             var mapContainer = document.getElementById('map');
             var mapOption = {
                 center: base_center,    // 지도의 중심좌표
