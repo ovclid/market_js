@@ -72,8 +72,8 @@
              
         <script>
             //var base_center = new kakao.maps.LatLng(36.858351739006984, 127.44549719302887)
-            base_Lat = 36.63310550994249;
-            base_Lng = 127.48650852878216;
+            let base_Lat = 36.63310550994249;
+            let base_Lng = 127.48650852878216;
 
             function setPosition(position) {
                 base_Lat = position.coords.latitude;
@@ -84,7 +84,8 @@
   				navigator.geolocation.getCurrentPosition(success = setPosition, 
 							                error = undefined, 
 								            options = undefined);
-			}
+		};
+	
             var base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
 		
             var mapContainer = document.getElementById('map');
