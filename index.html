@@ -133,22 +133,25 @@
             var polygonPath = Object.assign({}, polygonPath_Main, polygonPath_Middle, polygonPath_East, polygonPath_West, polygonPath_North, polygonPath_South);
             var markers_list = [];
 
-	    var onnuri_reg_list = [
+	    var onnuri_reg_list = {
 		"가복카페" : [36.176742, 127.775142, "카페"],
 		"거송" : [36.176528, 127.775341, "한식"]
-	    ];
-
-	    var circle = new kakao.maps.Circle({
-    		center : new kakao.maps.LatLng(36.176742, 127.775142),  // 원의 중심좌표 입니다 
-    		radius: 2, // 미터 단위의 원의 반지름입니다 
-    		strokeWeight: 2, // 선의 두께입니다 
-    		strokeColor: '#75B8FA', // 선의 색깔입니다
-    		strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-    		//strokeStyle: 'dashed', // 선의 스타일 입니다
-    		fillColor: '#CFE7FF', // 채우기 색깔입니다
-    		fillOpacity: 0.7  // 채우기 불투명도 입니다   
-	    }); 
-	    circle.setMap(map); 
+	    };
+		
+	    var onnuri_reg_market = Object.keys(onnuri_reg_list);
+	    for (var i = 0; i < onnuri_reg_market.length ; i++) { 
+		    var circle = new kakao.maps.Circle({
+	    		center : new kakao.maps.LatLng(onnuri_reg_list[onnuri_reg_market[i]][0], onnuri_reg_list[onnuri_reg_market[i]][1]),  // 원의 중심좌표 입니다 
+	    		radius: 2, // 미터 단위의 원의 반지름입니다 
+	    		strokeWeight: 2, // 선의 두께입니다 
+	    		strokeColor: '#75B8FA', // 선의 색깔입니다
+	    		strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	    		strokeStyle: 'dashed', // 선의 스타일 입니다
+	    		fillColor: '#CFE7FF', // 채우기 색깔입니다
+	    		fillOpacity: 0.7  // 채우기 불투명도 입니다   
+		    }); 
+		    circle.setMap(map); 
+	    };
 		
             // 인포윈도우 생성
             var infowindow = new kakao.maps.InfoWindow({
