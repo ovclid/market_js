@@ -75,7 +75,7 @@
             let base_Lat = 36.63310550994249;
             let base_Lng = 127.48650852878216;
 
-	      function setPosition(position) {
+	     function setPosition(position) {
                 base_Lat = position.coords.latitude;
                 base_Lng = position.coords.longitude;
 
@@ -84,9 +84,17 @@
 
 		base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
 		map.setCenter(base_center)
+
+		var currentPosMarker = new kakao.maps.Marker({
+                	map: map,
+                	position: base_center
+                });
+		
+		currentPosMarker.setMap(map);
+	
             }
 
-		
+	    // 뒤의 코드가 실행되고(지도가 그려지고) 나서 나중에 천천히 적용됨
             navigator.geolocation.getCurrentPosition(success = setPosition, error = undefined, options = undefined);
 
 
