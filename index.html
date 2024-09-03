@@ -133,7 +133,13 @@
             var mapTypeControl = new kakao.maps.MapTypeControl();    
             var polygonPath = Object.assign({}, polygonPath_Main, polygonPath_Middle, polygonPath_East, polygonPath_West, polygonPath_North, polygonPath_South);
             var markers_list = [];
-	
+            // 인포윈도우 생성
+            var infowindow = new kakao.maps.InfoWindow({
+                    //zIndex: 1,
+                    content : 'market[i]',
+                    removable : true
+            });
+		
 	    var onnuri_reg_market = Object.keys(onnuri_reg_list);
 	    for (var i = 0; i < onnuri_reg_market.length ; i++) { 
 		    var circle = new kakao.maps.Circle({
@@ -167,12 +173,7 @@
 		    
 	    };
 		
-            // 인포윈도우 생성
-            var infowindow = new kakao.maps.InfoWindow({
-                    //zIndex: 1,
-                    content : 'market[i]',
-                    removable : true
-            });
+
 
             map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPLEFT);
             var market = Object.keys(polygonPath);  
