@@ -78,7 +78,12 @@
 	      function setPosition(position) {
                 base_Lat = position.coords.latitude;
                 base_Lng = position.coords.longitude;
+
+		console.log(position.coords.latitude)
+		console.log(position.coords.longitude)      
             }
+
+		
             navigator.geolocation.getCurrentPosition(success = setPosition, error = undefined, options = undefined);
 
 
