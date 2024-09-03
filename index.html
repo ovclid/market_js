@@ -84,9 +84,9 @@
 	    
         <script>
             //var base_center = new kakao.maps.LatLng(36.858351739006984, 127.44549719302887)
-            let base_Lat = 36.176580653239384;  // 영동전통시장
-            let base_Lng = 127.77534847937774;
-
+            let base_Lat = 36.17502542411789; //36.176580653239384;  // 영동전통시장
+            let base_Lng = 127.77580277515723; //127.77534847937774;
+		
 	     function setPosition(position) {
                 base_Lat = position.coords.latitude;
                 base_Lng = position.coords.longitude;
@@ -125,7 +125,7 @@
             var mapContainer = document.getElementById('map');
             var mapOption = {
                 center: base_center,    // 지도의 중심좌표
-                level: 5                // 지도의 확대 레벨(숫자가 커질 수록 지도 축소)
+                level: 4                // 지도의 확대 레벨(숫자가 커질 수록 지도 축소)
             };  
         
             // 지도 생성    
