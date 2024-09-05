@@ -369,7 +369,10 @@ var polygonPath_Middle = {
                 new kakao.maps.LatLng(36.93707830508045, 127.690612009999), 
        ], 
          "음성무극시장" : [ 
-                new kakao.maps.LatLng(36.99336376757367, 127.595758436684 ), 
+        new kakao.maps.LatLng(36.99371317031218, 127.5963748576759 ), 
+        new kakao.maps.LatLng(36.99370148630168, 127.5961799325952 ), 
+        new kakao.maps.LatLng(36.9935206977167, 127.5957097011157 ), 
+        new kakao.maps.LatLng(36.99336376757367, 127.595758436684 ), 
         new kakao.maps.LatLng(36.99340853923268, 127.5956791454971 ), 
         new kakao.maps.LatLng(36.99337186732001, 127.5955790574193 ), 
         new kakao.maps.LatLng(36.99328765204422, 127.5956466135238 ), 
@@ -427,10 +430,8 @@ var polygonPath_Middle = {
         new kakao.maps.LatLng(36.99357649356025, 127.5965549491509 ), 
         new kakao.maps.LatLng(36.99356715383028, 127.5964981166387 ), 
         new kakao.maps.LatLng(36.99363569453464, 127.596474773255 ), 
-        new kakao.maps.LatLng(36.9936259914962, 127.5964024972431 ), 
-        new kakao.maps.LatLng(36.99371317031218, 127.5963748576759 ), 
-        new kakao.maps.LatLng(36.99370148630168, 127.5961799325952 ), 
-        new kakao.maps.LatLng(36.9935206977167, 127.5957097011157 ), 
+        new kakao.maps.LatLng(36.9936259914962, 127.5964024972431 )
+
         ],
         "괴산시장" : [ 
                 new kakao.maps.LatLng(36.80964977083553, 127.79780209064484), 
