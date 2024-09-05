@@ -84,11 +84,9 @@
 	    
         <script>
             //var base_center = new kakao.maps.LatLng(36.858351739006984, 127.44549719302887)
-            let base_Lat = 36.17502542411789; //36.176580653239384;  // 영동전통시장
-            let base_Lng = 127.77580277515723; //127.77534847937774;
+            let base_Lat =   36.593198 //음성무극시장         // 청주(36.176580653239384;)  영동전통시장(36.17502542411789;) 
+            let base_Lng =  127.354912 //음성무극시장    //청주(127.77534847937774;) 영동전통시장(127.77580277515723;)
 		
-
-
 
 	        function setPosition(position) {
                 base_Lat = position.coords.latitude;
@@ -212,8 +210,8 @@
 
         
             // 행사 장소
-            gather_lat = 36.17784158411801;
-            gather_lng = 127.7744160743991;
+            gather_lat = 36.593557 // 영동 -> 36.17784158411801;
+            gather_lng = 127.354512 // 영동 -> 127.7744160743991;
             gather_pos = new kakao.maps.LatLng(gather_lat, gather_lng);  // 집결 장소
 		    var gatherPosMarker = new kakao.maps.Marker({
                 	map: map,
@@ -226,10 +224,10 @@
             var customOverlay = new kakao.maps.CustomOverlay({
                     map: map,
                     position: gather_pos,
-                    //content: '<div class = "currentpos_overlay">' + '행사장(9.4, 15시)'  + '</div>',   
+                    //content: '<div class = "currentpos_overlay">' + '행사장(9.5, 15시)'  + '</div>',   
                     
                     content : '<div class="currentpos_overlay">' + '<address> <a href = https://map.kakao.com/link/to/' 
-                            + "행사장" + ',' + gather_lat + ',' + gather_lng + ">" + "행사장(9.4, 15시)" + '</a>' + '</address> </div>',
+                            + "행사장" + ',' + gather_lat + ',' + gather_lng + ">" + "행사장(9.10, 15시)" + '</a>' + '</address> </div>',
 
 
                     yAnchor: 2.9
