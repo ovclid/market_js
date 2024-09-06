@@ -87,7 +87,7 @@
             let base_Lat =   36.9916485888649; //음성무극시장         // 청주(36.176580653239384;)  영동전통시장(36.17502542411789;) 
             let base_Lng =  127.596105990174; //음성무극시장    //청주(127.77534847937774;) 영동전통시장(127.77580277515723;)
 
-	        function setPosition(position) {
+	    function setPosition(position) {
                 base_Lat = position.coords.latitude;
                 base_Lng = position.coords.longitude;
 
@@ -113,7 +113,7 @@
                 })
             }
 
-	        // 뒤의 코드가 실행되고(지도가 그려지고) 나서 나중에 천천히 적용됨
+	    // 뒤의 코드가 실행되고(지도가 그려지고) 나서 나중에 천천히 적용됨
             //navigator.geolocation.getCurrentPosition(success = setPosition, error = undefined, options = undefined);
 
             let base_center = new kakao.maps.LatLng(base_Lat, base_Lng);
@@ -129,10 +129,6 @@
             var polygonPath = Object.assign({}, polygonPath_Main, polygonPath_Middle, polygonPath_East, polygonPath_West, polygonPath_North, polygonPath_South);
             var markers_list = [];
 	
-
-
-            
-		
             // 인포윈도우 생성
             var infowindow = new kakao.maps.InfoWindow({
                     //zIndex: 1,
@@ -159,7 +155,6 @@
                 make_marker(i);
             }
 
-
             function make_marker(i) {
                 var marker = new kakao.maps.Marker({
                             position: polygonPath[market[i]][0],
@@ -167,8 +162,8 @@
                 });    
                 marker.setMap(map);
                                
-                //var content = '<div class="click_text"> <address> <a href = "https://map.kakao.com/link/to/'+ market[i] + ',' + loc_Parking_lot[market[i]][0] + ',' + loc_Parking_lot[market[i]][1] + '">' + market[i] + " 카카오 내비" + '</a> </address> </div>';
-                var content = market[i];
+             //var content = '<div class="click_text"> <address> <a href = "https://map.kakao.com/link/to/'+ market[i] + ',' + loc_Parking_lot[market[i]][0] + ',' + loc_Parking_lot[market[i]][1] + '">' + market[i] + " 카카오 내비" + '</a> </address> </div>';
+             var content = market[i];
                 kakao.maps.event.addListener(marker, 'click', function() {
                     
                     console.log("mark event listener!!!");
@@ -196,7 +191,6 @@
 
             }
 
-
             // 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
             function setMarkers(map) {
                 for (var i = 0; i < markers_list.length; i++) {
@@ -205,21 +199,18 @@
                 
             }
 
-
-
-        
             // 행사 장소          
             gather_lat = 36.99319955612934;  // 영동 -> 36.17784158411801;
             gather_lng = 127.59589949466245; // 영동 -> 127.7744160743991;
             gather_pos = new kakao.maps.LatLng(gather_lat, gather_lng);  // 집결 장소
-		    var gatherPosMarker = new kakao.maps.Marker({
-                	map: map,
-                	position: gather_pos
-            });
+		    		var gatherPosMarker = new kakao.maps.Marker({
+                		map: map,
+                		position: gather_pos
+            		});
 		
-		    gatherPosMarker.setMap(map);
+	    gatherPosMarker.setMap(map);
 
-		    // 커스텀 오버레이를 생성합니다
+	    // 행사 장소에 대한 정보(커스텀 오버레이) 표시
             var customOverlay = new kakao.maps.CustomOverlay({
                     map: map,
                     position: gather_pos,
@@ -227,11 +218,8 @@
                     
                     content : '<div class="currentpos_overlay">' + '<address> <a href = https://map.kakao.com/link/to/' 
                             + "행사장" + ',' + gather_lat + ',' + gather_lng + ">" + "행사장(9.10, 15시)" + '</a>' + '</address> </div>',
-
-
                     yAnchor: 2.9
             });
-
 
         var onnuri_reg_market = Object.keys(onnuri_reg_list);
 	    for (var i = 0; i < onnuri_reg_market.length ; i++) { 
@@ -247,12 +235,10 @@
 	    		fillOpacity: 0.7  // 채우기 불투명도 입니다   
 		    }); 
 
-
-
             kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {  
                 var latlng = mouseEvent.latLng;
-                console.log("test")
-                console.log(latlng.toString());      
+                //console.log("test")
+                //console.log(latlng.toString());      
                 
                
                 min_value = 9;
@@ -267,12 +253,12 @@
                         min_value = value;
                         min_index = i;
                     }
-                    console.log(x*x + y*y)
+                    //console.log(x*x + y*y)
                 };
                 
-                console.log(min_value)
-                console.log(min_index)
-                console.log(onnuri_reg_market[min_index]);
+                //console.log(min_value)
+                //console.log(min_index)
+                //console.log(onnuri_reg_market[min_index]);
                 console.log(onnuri_reg_list[onnuri_reg_market[min_index]]);
 
                 content_base = onnuri_reg_market[min_index] + "(" + onnuri_reg_list[onnuri_reg_market[min_index]][2] + ")";
@@ -294,15 +280,11 @@
             circle.setMap(map); 
 	    };
 
-
-
             map.setCenter(base_center)
             
             var geocoder = new kakao.maps.services.Geocoder();
-
             function searchDetailAddrFromCoords(coords, callback) {
                 geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-
             }
 
             // 지도를 클릭하면 해당 위치에 마크 생성(내비게이션 연결)
@@ -354,9 +336,6 @@
                         })
                         markers_list.push(customOverlay);
                         //map.setCenter(coords);
-
-
-
                     }
                     else{
                         console.log("실패: ");
@@ -387,10 +366,8 @@
                     address = "진천읍 중앙동7길 20";
                 }
                 
-                
                 // 주소 검색 전 전통시장 이름과 유사성 체크 
                 // 유사(include)하면 유사한 시장명 표시, 동일하면 그것으로 중심자표 이동
-
                 var similar_market_found = false;
                 for (var i = 0 ; i < market.length; i++) {
                     if (market[i].includes(address)) {
@@ -398,7 +375,6 @@
                         newItem.innerHTML = market[i];
                         newItem.onclick = goto_address;
                         
-
                         list_ele.appendChild(newItem);
                         similar_market_found = true;
                     }
@@ -421,10 +397,8 @@
                 geocoder.addressSearch(address, function(result, status) {
                     if (status === kakao.maps.services.Status.OK) {
                         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-                        
-
                         setMarkers(null);
-
+			    
                         var marker = new kakao.maps.Marker({
                             map: map,
                             position: coords
