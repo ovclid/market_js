@@ -314,9 +314,9 @@ var polygonPath_Main = {
         new kakao.maps.LatLng(36.63544468049329, 127.4283959799024 ), 
         ],
     "청주소나무길골목형상점가" : [ 
-        new kakao.maps.LatLng(36.63852867953743, 127.4889210801242 ), 
-        new kakao.maps.LatLng(36.63851769090419, 127.4887558686344 ), 
-        new kakao.maps.LatLng(36.63706554256363, 127.4889209966501 ), 
-        new kakao.maps.LatLng(36.63708503651561, 127.4890762433103 ), 
+        new kakao.maps.LatLng(36.63855317536026, 127.4892764897511 ), 
+        new kakao.maps.LatLng(36.63849639729414, 127.4884686754651 ), 
+        new kakao.maps.LatLng(36.63703686081638, 127.4886541154666 ), 
+        new kakao.maps.LatLng(36.63713884328178, 127.4894394256527 ), 
         ],
 };
